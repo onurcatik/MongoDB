@@ -1,16 +1,16 @@
-# MongoDB Sorting and Limiting Tutorial
+# Sorting and Limiting
 
 MongoDB offers powerful capabilities for sorting and limiting documents, allowing you to efficiently manage and retrieve data from your collections. In this tutorial, we'll delve into how to use MongoDB's sorting and limiting features effectively.
 
-### 1. Introduction to Sorting and Limiting in MongoDB
+## 1. Introduction to Sorting and Limiting in MongoDB
 
 Sorting and limiting are essential operations in MongoDB when you want to retrieve specific documents from a collection in a particular order and limit the number of documents returned. MongoDB provides methods like `sort()` and `limit()` to accomplish these tasks.
 
-### 2. Sorting Documents
+## 2. Sorting Documents
 
 To sort documents in MongoDB, you can use the `sort()` method in conjunction with the `find()` method. Let's go through the process step by step:
 
-#### Sorting by a Field
+### Sorting by a Field
 
 ```javascript
 // Sorting documents by 'Name' field in alphabetical order
@@ -26,7 +26,7 @@ DB.students.find().sort({GPA: -1});
 
 Here, we're sorting documents by the 'GPA' field in descending order, from highest to lowest.
 
-### 3. Limiting Documents
+## 3. Limiting Documents
 
 Limiting documents allows you to control the number of documents returned in a query. MongoDB's `limit()` method facilitates this functionality.
 
@@ -44,7 +44,7 @@ DB.students.find().limit(3);
 
 Here, we limit the returned documents to 3, useful for scenarios where you want to retrieve a subset of results.
 
-### 4. Combining Sorting and Limiting
+## 4. Combining Sorting and Limiting
 
 You can also combine sorting and limiting to refine your queries further.
 

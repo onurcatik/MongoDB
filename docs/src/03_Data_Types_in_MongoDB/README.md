@@ -1,4 +1,4 @@
-# MongoDB Data Types Tutorial
+# Data Types
 
 MongoDB is a popular NoSQL database that offers flexibility in data modeling, allowing you to store various data types within documents. In this tutorial, we will explore the basic data types supported by MongoDB and how to use them effectively.
 

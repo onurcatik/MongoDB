@@ -1,4 +1,4 @@
-# MongoDB Comparison Operators Tutorial
+# Comparison Operators
 
 
 In MongoDB, comparison operators allow you to query data based on specific value comparisons. These operators are denoted with the dollar sign ($) and can be used to filter documents in a collection based on various criteria. This tutorial will cover different comparison operators in MongoDB, along with code snippets for each operator.

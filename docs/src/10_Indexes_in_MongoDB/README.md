@@ -1,4 +1,4 @@
-# Comprehensive Guide to MongoDB Indexes
+# MongoDB Indexes
 
 In MongoDB, indexes play a crucial role in enhancing query performance by facilitating quick lookups of fields. However, it's essential to use them judiciously as they consume additional memory and can slow down insert, update, and remove operations. This comprehensive tutorial will delve into the fundamentals of MongoDB indexes, including their significance, usage, creation, management, and best practices.
 
