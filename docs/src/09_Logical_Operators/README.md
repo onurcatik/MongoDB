@@ -1,8 +1,8 @@
-# MongoDB Logical Operators Tutorial
+# Logical Operators Tutorial
 
 Logical operators in MongoDB are powerful tools for querying data based on expressions that evaluate to true or false. In this tutorial, we'll explore the four main logical operators: $and, $or, $nor, and $not, with detailed explanations and code snippets.
 
-### 1. Using $and Operator
+## 1. Using $and Operator
 
 The $and operator returns documents where all specified conditions are true.
 
@@ -19,7 +19,7 @@ db.students.find({
 
 This query will return students who are both full-time and 22 years or younger.
 
-### 2. Using $or Operator
+## 2. Using $or Operator
 
 The $or operator returns documents where at least one of the specified conditions is true.
 
@@ -36,7 +36,7 @@ db.students.find({
 
 This query will return students who are either full-time or 22 years or younger.
 
-### 3. Using $nor Operator
+## 3. Using $nor Operator
 
 The $nor operator returns documents where none of the specified conditions are true.
 
@@ -53,7 +53,7 @@ db.students.find({
 
 This query will return students who are neither older than 22 nor full-time.
 
-### 4. Using $not Operator
+## 4. Using $not Operator
 
 The $not operator performs a logical NOT operation on the specified condition(s).
 
@@ -67,7 +67,7 @@ db.students.find({
 
 This query will return students whose age is not greater than or equal to 30.
 
-### Handling Null Values with $not Operator
+## Handling Null Values with $not Operator
 
 The $not operator can also handle null values effectively.
 

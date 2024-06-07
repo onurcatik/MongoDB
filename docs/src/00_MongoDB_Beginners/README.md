@@ -2,13 +2,13 @@
 
 MongoDB is a NoSQL database management system that has gained immense popularity due to its ability to handle large volumes of data efficiently. Unlike traditional relational database management systems (RDBMS), MongoDB stores data in a flexible, schema-less format, making it suitable for a wide range of applications. In this comprehensive tutorial, we will cover everything you need to know to get started with MongoDB in about an hour.
 
-### Prerequisites
+## Prerequisites
 
 Before diving into MongoDB, make sure you have the following prerequisites:
 
 - Basic understanding of an object-oriented programming language (e.g., Python, Java, C++, JavaScript).
 
-### Installation
+## Installation
 
 Let's begin by installing MongoDB on your system.
 
@@ -43,7 +43,7 @@ Let's begin by installing MongoDB on your system.
      - Under "System Variables," click on "New" and add a variable name (e.g., `MONGODB_HOME`) with the MongoDB Shell executable path.
      - Click "OK" to save the changes.
 
-### Getting Started with MongoDB
+## Getting Started with MongoDB
 
 Now that MongoDB is installed, let's explore how to connect to the database and perform basic operations.
 
@@ -68,7 +68,7 @@ Now that MongoDB is installed, let's explore how to connect to the database and 
 
    - To exit the MongoDB Shell, type `exit` and press Enter.
 
-### Using MongoDB Shell in Visual Studio Code
+## Using MongoDB Shell in Visual Studio Code
 
 If you prefer using Visual Studio Code for MongoDB development, follow these steps:
 

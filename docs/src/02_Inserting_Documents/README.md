@@ -1,13 +1,13 @@
-# MongoDB Insert Documents Tutorial
+# Insert Documents
 
 In this tutorial, we'll cover how to insert documents into a MongoDB database using both the MongoDB Shell and MongoDB Compass. We'll walk through inserting single documents as well as multiple documents using both methods. Let's dive in!
 
-### Prerequisites:
+## Prerequisites:
 
 - MongoDB installed on your machine.
 - Basic understanding of MongoDB concepts like databases, collections, and documents.
 
-### MongoDB Shell Method:
+## MongoDB Shell Method:
 
 1. **Navigate to the Correct Database:**
    First, ensure that you are using the correct database. If you're following from the previous topic where the database was named "school", let's clear the screen and use that database.
@@ -60,7 +60,7 @@ In this tutorial, we'll cover how to insert documents into a MongoDB database us
    db.students.find()
    ```
 
-### MongoDB Compass Method:
+## MongoDB Compass Method:
 
 1. **Navigate to the Correct Database and Collection:**
    Open MongoDB Compass and ensure you are within the correct database and collection where you want to insert the documents.

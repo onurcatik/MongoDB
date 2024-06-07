@@ -1,8 +1,8 @@
-# Deleting Documents in MongoDB: A Comprehensive Guide
+# Deleting Documents in MongoDB
 
 MongoDB is a powerful NoSQL database that allows for flexible data storage and retrieval. One common operation when working with MongoDB is deleting documents from collections. In this tutorial, we'll explore various methods to delete documents using both MongoDB Compass and the MongoDB Shell.
 
-### Exporting Your Collection (Optional)
+## Exporting Your Collection (Optional)
 
 Before performing any deletions, it's a good practice to export your collection. This serves as a backup in case you accidentally delete important data. Here's how to export your collection using MongoDB Compass:
 
@@ -13,7 +13,7 @@ Before performing any deletions, it's a good practice to export your collection.
 5. Specify the destination for the exported file.
 6. Click "Export."
 
-### Deleting Documents in MongoDB Compass
+## Deleting Documents in MongoDB Compass
 
 Deleting documents in MongoDB Compass is straightforward. Follow these steps:
 
@@ -23,7 +23,7 @@ Deleting documents in MongoDB Compass is straightforward. Follow these steps:
 4. Click on the trash can icon next to the document.
 5. Confirm the deletion.
 
-### Deleting Documents in MongoDB Shell
+## Deleting Documents in MongoDB Shell
 
 Deleting documents using the MongoDB Shell provides more flexibility and power. Here's how to do it:
 
@@ -75,7 +75,7 @@ Deleting documents using the MongoDB Shell provides more flexibility and power. 
    db.your_collection_name.find()
    ```
 
-### Importing Your Collection
+## Importing Your Collection
 
 Once you've completed the deletions, you may want to import your previously exported collection back into MongoDB. Here's how to do it using MongoDB Compass:
 
