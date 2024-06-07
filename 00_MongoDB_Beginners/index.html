@@ -1,0 +1,359 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>MongoDB for Beginners</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../00_MongoDB_Beginners/index.html" class="active"><strong aria-hidden="true">1.</strong> MongoDB for Beginners</a></li><li class="chapter-item expanded "><a href="../01_MongoDB_Databases/index.html"><strong aria-hidden="true">2.</strong> MongoDB - Databases</a></li><li class="chapter-item expanded "><a href="../02_Inserting_Documents/index.html"><strong aria-hidden="true">3.</strong> Inserting Documents</a></li><li class="chapter-item expanded "><a href="../03_Data_Types_in_MongoDB/index.html"><strong aria-hidden="true">4.</strong> Data Types in MongoDB</a></li><li class="chapter-item expanded "><a href="../04_Sorting_and_Limiting_Results/index.html"><strong aria-hidden="true">5.</strong> Sorting and Limiting Results</a></li><li class="chapter-item expanded "><a href="../05_Finding_Documents/index.html"><strong aria-hidden="true">6.</strong> Finding Documents</a></li><li class="chapter-item expanded "><a href="../06_Updating_Documents/index.html"><strong aria-hidden="true">7.</strong> Updating Documents</a></li><li class="chapter-item expanded "><a href="../07_Deleting_Documents/index.html"><strong aria-hidden="true">8.</strong> Deleting Documents</a></li><li class="chapter-item expanded "><a href="../08_Comparison_Operators/index.html"><strong aria-hidden="true">9.</strong> Comparison Operators</a></li><li class="chapter-item expanded "><a href="../09_Logical_Operators/index.html"><strong aria-hidden="true">10.</strong> Logical Operators</a></li><li class="chapter-item expanded "><a href="../10_Indexes_in_MongoDB/index.html"><strong aria-hidden="true">11.</strong> Indexes in MongoDB</a></li><li class="chapter-item expanded "><a href="../11_Collections_in_MongoDB/index.html"><strong aria-hidden="true">12.</strong> Collections in MongoDB</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="mongodb-tutorial-for-beginners-"><a class="header" href="#mongodb-tutorial-for-beginners-">MongoDB Tutorial for Beginners 🍃</a></h1>
+<p>MongoDB is a NoSQL database management system that has gained immense popularity due to its ability to handle large volumes of data efficiently. Unlike traditional relational database management systems (RDBMS), MongoDB stores data in a flexible, schema-less format, making it suitable for a wide range of applications. In this comprehensive tutorial, we will cover everything you need to know to get started with MongoDB in about an hour.</p>
+<h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+<p>Before diving into MongoDB, make sure you have the following prerequisites:</p>
+<ul>
+<li>Basic understanding of an object-oriented programming language (e.g., Python, Java, C++, JavaScript).</li>
+</ul>
+<h2 id="installation"><a class="header" href="#installation">Installation</a></h2>
+<p>Let's begin by installing MongoDB on your system.</p>
+<ol>
+<li>
+<p><strong>Visit MongoDB Website:</strong></p>
+<ul>
+<li>Go to <a href="https://www.mongodb.com/">mongodb.com</a>.</li>
+<li>Navigate to the "Resources" section and click on "Server" in the left sidebar.</li>
+</ul>
+</li>
+<li>
+<p><strong>Select Installation Tutorial:</strong></p>
+<ul>
+<li>Choose the installation tutorial based on your operating system. For this tutorial, we'll focus on the Windows platform.</li>
+</ul>
+</li>
+<li>
+<p><strong>Download MongoDB Community Edition:</strong></p>
+<ul>
+<li>Scroll down to find the "Install MongoDB Community Edition" section.</li>
+<li>Follow the instructions to download the installer for your platform (in this case, Windows).</li>
+<li>Save the installer to a location of your choice.</li>
+</ul>
+</li>
+<li>
+<p><strong>Install MongoDB:</strong></p>
+<ul>
+<li>Run the downloaded installer.</li>
+<li>Follow the on-screen instructions, accepting the license agreement and selecting installation options.</li>
+<li>Make sure to install MongoDB as a service and include MongoDB Compass, a graphical user interface for managing MongoDB databases.</li>
+</ul>
+</li>
+<li>
+<p><strong>Install MongoDB Shell:</strong></p>
+<ul>
+<li>After installing MongoDB, proceed to install the MongoDB Shell.</li>
+<li>Again, go to the left sidebar on the MongoDB website and select "MongoDB Shell."</li>
+<li>Download the appropriate version for your platform (Windows in this case).</li>
+<li>Save the installer and unzip the folder.</li>
+</ul>
+</li>
+<li>
+<p><strong>Set up Environment Variables:</strong></p>
+<ul>
+<li>Copy the path to the MongoDB Shell executable.</li>
+<li>Add the file path to your system's environment variables:
+<ul>
+<li>Search for "environment variables" in your system settings.</li>
+<li>Under "System Variables," click on "New" and add a variable name (e.g., <code>MONGODB_HOME</code>) with the MongoDB Shell executable path.</li>
+<li>Click "OK" to save the changes.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="getting-started-with-mongodb"><a class="header" href="#getting-started-with-mongodb">Getting Started with MongoDB</a></h2>
+<p>Now that MongoDB is installed, let's explore how to connect to the database and perform basic operations.</p>
+<ol>
+<li>
+<p><strong>Using MongoDB Compass:</strong></p>
+<ul>
+<li>Open MongoDB Compass from the desktop shortcut or start menu.</li>
+<li>Click the "Connect" button to establish a connection to your MongoDB instance.</li>
+<li>MongoDB Compass provides a graphical interface for managing databases, collections, and documents.</li>
+</ul>
+</li>
+<li>
+<p><strong>Using MongoDB Shell:</strong></p>
+<ul>
+<li>Open the MongoDB Shell by typing <code>mongo</code> in your terminal or command prompt.</li>
+<li>You can also use Visual Studio Code with the MongoDB extension for a more integrated experience.</li>
+</ul>
+</li>
+<li>
+<p><strong>Connecting to MongoDB:</strong></p>
+<ul>
+<li>To establish a connection to your MongoDB instance, type <code>mongo</code> or <code>sh</code> in the terminal.</li>
+<li>You should see a prompt indicating a successful connection.</li>
+</ul>
+</li>
+<li>
+<p><strong>Basic Operations:</strong></p>
+<ul>
+<li>Once connected, you can perform various operations such as creating databases, collections, inserting documents, querying data, and more.</li>
+<li>Use commands like <code>db.createCollection()</code>, <code>db.collection.insertOne()</code>, <code>db.collection.find()</code>, etc., to interact with the database.</li>
+</ul>
+</li>
+<li>
+<p><strong>Exiting MongoDB Shell:</strong></p>
+<ul>
+<li>To exit the MongoDB Shell, type <code>exit</code> and press Enter.</li>
+</ul>
+</li>
+</ol>
+<h2 id="using-mongodb-shell-in-visual-studio-code"><a class="header" href="#using-mongodb-shell-in-visual-studio-code">Using MongoDB Shell in Visual Studio Code</a></h2>
+<p>If you prefer using Visual Studio Code for MongoDB development, follow these steps:</p>
+<ol>
+<li>
+<p><strong>Install MongoDB Extension:</strong></p>
+<ul>
+<li>Open Visual Studio Code and go to the Extensions view.</li>
+<li>Search for "MongoDB" and install the MongoDB extension.</li>
+</ul>
+</li>
+<li>
+<p><strong>Connect to MongoDB:</strong></p>
+<ul>
+<li>Click on the MongoDB icon in the activity bar.</li>
+<li>Click on "localhost" to establish a connection to your MongoDB instance.</li>
+</ul>
+</li>
+<li>
+<p><strong>Open MongoDB Shell:</strong></p>
+<ul>
+<li>Right-click in the MongoDB extension and select "Launch MongoDB Shell."</li>
+<li>This will open a terminal integrated within Visual Studio Code for interacting with MongoDB.</li>
+</ul>
+</li>
+<li>
+<p><strong>Perform Operations:</strong></p>
+<ul>
+<li>Use the integrated terminal to execute MongoDB commands just like you would in the standalone MongoDB Shell.</li>
+</ul>
+</li>
+<li>
+<p><strong>Exit MongoDB Shell:</strong></p>
+<ul>
+<li>To exit the MongoDB Shell, type <code>exit</code> and press Enter.</li>
+</ul>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+                            <a rel="next prefetch" href="../01_MongoDB_Databases/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+                    <a rel="next prefetch" href="../01_MongoDB_Databases/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Deleting Documents</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../00_MongoDB_Beginners/index.html"><strong aria-hidden="true">1.</strong> MongoDB for Beginners</a></li><li class="chapter-item expanded "><a href="../01_MongoDB_Databases/index.html"><strong aria-hidden="true">2.</strong> MongoDB - Databases</a></li><li class="chapter-item expanded "><a href="../02_Inserting_Documents/index.html"><strong aria-hidden="true">3.</strong> Inserting Documents</a></li><li class="chapter-item expanded "><a href="../03_Data_Types_in_MongoDB/index.html"><strong aria-hidden="true">4.</strong> Data Types in MongoDB</a></li><li class="chapter-item expanded "><a href="../04_Sorting_and_Limiting_Results/index.html"><strong aria-hidden="true">5.</strong> Sorting and Limiting Results</a></li><li class="chapter-item expanded "><a href="../05_Finding_Documents/index.html"><strong aria-hidden="true">6.</strong> Finding Documents</a></li><li class="chapter-item expanded "><a href="../06_Updating_Documents/index.html"><strong aria-hidden="true">7.</strong> Updating Documents</a></li><li class="chapter-item expanded "><a href="../07_Deleting_Documents/index.html" class="active"><strong aria-hidden="true">8.</strong> Deleting Documents</a></li><li class="chapter-item expanded "><a href="../08_Comparison_Operators/index.html"><strong aria-hidden="true">9.</strong> Comparison Operators</a></li><li class="chapter-item expanded "><a href="../09_Logical_Operators/index.html"><strong aria-hidden="true">10.</strong> Logical Operators</a></li><li class="chapter-item expanded "><a href="../10_Indexes_in_MongoDB/index.html"><strong aria-hidden="true">11.</strong> Indexes in MongoDB</a></li><li class="chapter-item expanded "><a href="../11_Collections_in_MongoDB/index.html"><strong aria-hidden="true">12.</strong> Collections in MongoDB</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="deleting-documents-in-mongodb"><a class="header" href="#deleting-documents-in-mongodb">Deleting Documents in MongoDB</a></h1>
+<p>MongoDB is a powerful NoSQL database that allows for flexible data storage and retrieval. One common operation when working with MongoDB is deleting documents from collections. In this tutorial, we'll explore various methods to delete documents using both MongoDB Compass and the MongoDB Shell.</p>
+<h2 id="exporting-your-collection-optional"><a class="header" href="#exporting-your-collection-optional">Exporting Your Collection (Optional)</a></h2>
+<p>Before performing any deletions, it's a good practice to export your collection. This serves as a backup in case you accidentally delete important data. Here's how to export your collection using MongoDB Compass:</p>
+<ol>
+<li>Open MongoDB Compass.</li>
+<li>Select your database and collection.</li>
+<li>Click on the "Export" button.</li>
+<li>Choose the export format (JSON or CSV).</li>
+<li>Specify the destination for the exported file.</li>
+<li>Click "Export."</li>
+</ol>
+<h2 id="deleting-documents-in-mongodb-compass"><a class="header" href="#deleting-documents-in-mongodb-compass">Deleting Documents in MongoDB Compass</a></h2>
+<p>Deleting documents in MongoDB Compass is straightforward. Follow these steps:</p>
+<ol>
+<li>Open MongoDB Compass.</li>
+<li>Select your database and collection.</li>
+<li>Locate the document you want to delete.</li>
+<li>Click on the trash can icon next to the document.</li>
+<li>Confirm the deletion.</li>
+</ol>
+<h2 id="deleting-documents-in-mongodb-shell"><a class="header" href="#deleting-documents-in-mongodb-shell">Deleting Documents in MongoDB Shell</a></h2>
+<p>Deleting documents using the MongoDB Shell provides more flexibility and power. Here's how to do it:</p>
+<ol>
+<li>
+<p>Open your MongoDB Shell.</p>
+</li>
+<li>
+<p>Select the database where your collection resides using the <code>use</code> command.</p>
+<pre><code>use your_database_name
+</code></pre>
+</li>
+<li>
+<p>To delete a single document, use the <code>deleteOne</code> method:</p>
+<pre><code>db.your_collection_name.deleteOne({ criteria })
+</code></pre>
+<p>Replace <code>{ criteria }</code> with the filter criteria for the document you want to delete.</p>
+<p>Example:</p>
+<pre><code>db.students.deleteOne({ name: "Larry" })
+</code></pre>
+</li>
+<li>
+<p>To delete multiple documents matching a criteria, use the <code>deleteMany</code> method:</p>
+<pre><code>db.your_collection_name.deleteMany({ criteria })
+</code></pre>
+<p>Replace <code>{ criteria }</code> with the filter criteria for the documents you want to delete.</p>
+<p>Example:</p>
+<pre><code>db.students.deleteMany({ full_time: false })
+</code></pre>
+</li>
+<li>
+<p>You can also delete documents based on the absence or presence of a field:</p>
+<ul>
+<li>To delete documents where a field does not exist:
+<pre><code>db.your_collection_name.deleteMany({ field: { $exists: false } })
+</code></pre>
+</li>
+<li>To delete documents where a field exists:
+<pre><code>db.your_collection_name.deleteMany({ field: { $exists: true } })
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>After deleting documents, you can verify the changes using the <code>find</code> method:</p>
+<pre><code>db.your_collection_name.find()
+</code></pre>
+</li>
+</ol>
+<h2 id="importing-your-collection"><a class="header" href="#importing-your-collection">Importing Your Collection</a></h2>
+<p>Once you've completed the deletions, you may want to import your previously exported collection back into MongoDB. Here's how to do it using MongoDB Compass:</p>
+<ol>
+<li>Open MongoDB Compass.</li>
+<li>Select your database.</li>
+<li>Click on "Add Data" and choose "Import JSON or CSV file."</li>
+<li>Locate your exported file and import it into the database.</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../06_Updating_Documents/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../08_Comparison_Operators/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../06_Updating_Documents/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../08_Comparison_Operators/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
